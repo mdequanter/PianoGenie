@@ -1,0 +1,23 @@
+{
+  "name": "useful-fourth-crabapple",
+  "version": "1.0.0",
+  "description": "Piano Genie\r ==============\r Have some fun pretending you're a piano virtuoso using machine learning!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://2949e159-89a6-4d7e-962a-66afc24f0810@api.glitch.com/git/useful-fourth-crabapple"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "interchange": "^1.0.0",
+    "johnny-five": "^2.1.0",
+    "node-pixel": "^0.11.0",
+    "nwjs-j5-fix": "^1.0.6",
+    "socket.io": "^4.4.0"
+  }
+}
