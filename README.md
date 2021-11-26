@@ -9,6 +9,10 @@ The more you pretend you're a real player, the better the melody (and you!) will
 
 Install :
 
+
+First upload Firmata to you Arduino Uno board.
+
+
 git clone https://github.com/mdequanter/raspiPianoGenie
 cd raspiPianoGenie
 git init
