@@ -20,18 +20,10 @@ Start :
 
 node index.js
 
-Then open Chromium, the site will be launched on port 5000, so :
+Then open your browser, the site will be launched on port 5000, so :
 
 http://localhost:5000
 
-
-Autostart webpage on a raspberry PI, follow totorial :
-
-https://diyprojects.io/open-html-page-starting-raspberry-pi-os-chromium-browser-full-screen-kiosk-mode/#.YZ_J5cfMIuU
-
-Autostart nodejs on raspberry pi follow following tutorial :
-
-https://desertbot.io/blog/nodejs-git-and-pm2-headless-raspberry-pi-install
 
 
 
