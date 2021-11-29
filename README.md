@@ -1,11 +1,10 @@
 Piano Genie
 ==============
-Have some fun pretending you're a piano virtuoso using machine learning!
 
-Use the **1-8** numbered keys on your keyboard (or the home row **a-f** and **j-;**) or **touch** the coloured blocks to play the piano. Use the **space bar** to control the sustain pedal. 
+Piano Genie: An Intelligent Musical Interface
+Piano Genie is in some ways reminiscent of video games such as Rock Band and Guitar Hero that are accessible to novice musicians, with the crucial difference that users can freely improvise on Piano Genie rather than re-enacting songs from a fixed repertoire. You can try it out yourself via our interactive web demo!
 
-The more you pretend you're a real player, the better the melody (and you!) will sound.
-
+Rerefernce :  https://magenta.tensorflow.org/pianogenie
 
 Install :
 
@@ -13,10 +12,9 @@ Install :
 First upload Firmata to you Arduino Uno board.
 
 
-git clone https://github.com/mdequanter/raspiPianoGenie
+git clone https://github.com/mdequanter/PianoGenie
 cd raspiPianoGenie
-git init
-git install
+npm install
 
 Start :
 
