@@ -53,28 +53,43 @@ const listener = (data) => {
     console.log(data);
 
     button = data.value;
-    if (button >= 10) {
-        button = button - 10;
+    if (button >= 20) {
+        button = button - 20;
     }
 
-    const note = genie.nextFromKeyWhitelist(button, keyWhitelist, TEMPERATURE); //eerste variabele moet veranderen
-    const pitch = constants.lowest_note + note;
 
     // Hear it.
 
-    if (data.value < 10) {
-        buttonDown(button);
+    if (data.value < 20) {
+        if (data.value == 8) {
+            sustaining = true;
+            console.log("Sustain");
+        }
 
-        //player.playNoteDown(pitch, button);
+        if (data.value == 9) {
+            genie.resetState();
+            console.log("Resetting");
+        }
 
-        //const rect = piano.highlightNote(note, button);
 
-        //const noteToPaint = painter.addNote(button, rect.getAttribute('x'), rect.getAttribute('width'));
-        //heldButtonToVisualData.set(button, { rect: rect, note: note, noteToPaint: noteToPaint });
+        if (data.value <= 7) {
+            const note = genie.nextFromKeyWhitelist(button, keyWhitelist, TEMPERATURE); //eerste variabele moet veranderen
+            const pitch = constants.lowest_note + note;
+
+            buttonDown(button);
+        }
     }
 
-    if (data.value >= 10) {
-        buttonUp(button);
+    if (data.value >= 20) {
+        if (data.value == 28) {
+            sustaining = false;
+        }
+
+        if (data.value <= 27) {
+            buttonUp(button);
+        }
+
+        
     }
 
 
@@ -94,6 +109,7 @@ function initEverything() {
     playBtn.textContent = 'Play';
     playBtn.removeAttribute('disabled');
     playBtn.classList.remove('loading');
+    showMainScreen();
   });
 
   // Start the drawing loop.
