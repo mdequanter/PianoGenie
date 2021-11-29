@@ -6,7 +6,7 @@ Piano Genie is in some ways reminiscent of video games such as Rock Band and Gui
 
 Refernce :  https://magenta.tensorflow.org/pianogenie
 
-My demo online :  https://useful-fourth-crabapple.glitch.me/
+My demo online :  https://useful-fourth-crabapple.glitch.me/ if you want to try it first online.
 
 I created  a little piano 15 x 15 cm with 8 build-in fully functional keys and 2 sustaining feeds (one for sustaining and one for reset).  Inside you find an arduinu uno with cabling.
 
