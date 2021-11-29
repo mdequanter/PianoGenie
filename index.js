@@ -71,6 +71,18 @@ board.on('ready', () => {
         isPullup: true
     });
 
+    
+    button9 = new five.Button({
+        pin: 11,
+        isPullup: true
+    });
+    
+    button10 = new five.Button({
+        pin: 12,
+        isPullup: true
+    });
+
+
 
     button1.on("down", function (value) {
         io.sockets.emit('inputChange', {
@@ -83,7 +95,7 @@ board.on('ready', () => {
     button1.on("up", function (value) {
         io.sockets.emit('inputChange', {
             id: 'button1',
-            value: 10
+            value: 20
         });
     });
 
@@ -98,7 +110,7 @@ board.on('ready', () => {
     button2.on("up", function () {
         io.sockets.emit('inputChange', {
             id: 'button2',
-            value: 11
+            value: 21
         });
     });
 
@@ -113,7 +125,7 @@ board.on('ready', () => {
     button3.on("up", function (value) {
         io.sockets.emit('inputChange', {
             id: 'button3',
-            value: 12
+            value: 22
         });
     });
 
@@ -128,7 +140,7 @@ board.on('ready', () => {
     button4.on("up", function () {
         io.sockets.emit('inputChange', {
             id: 'button4',
-            value: 13
+            value: 23
         });
     });
 
@@ -143,7 +155,7 @@ board.on('ready', () => {
     button5.on("up", function () {
         io.sockets.emit('inputChange', {
             id: 'button5',
-            value: 14
+            value: 24
         });
     });
 
@@ -157,7 +169,7 @@ board.on('ready', () => {
     button6.on("up", function () {
         io.sockets.emit('inputChange', {
             id: 'button6',
-            value: 15
+            value: 25
         });
     });
 
@@ -172,11 +184,9 @@ board.on('ready', () => {
     button7.on("up", function () {
         io.sockets.emit('inputChange', {
             id: 'button7',
-            value: 16
+            value: 26
         });
     });
-
-
 
     button8.on("down", function () {
         io.sockets.emit('inputChange', {
@@ -188,10 +198,33 @@ board.on('ready', () => {
     button8.on("up", function () {
         io.sockets.emit('inputChange', {
             id: 'button8',
-            value: 17
+            value: 27
+        });
+    });
+    
+
+    button9.on("down", function () {
+        io.sockets.emit('inputChange', {
+            id: 'button9',
+            value: 8
         });
     });
 
+
+    button9.on("up", function () {
+        io.sockets.emit('inputChange', {
+            id: 'button9',
+            value: 28
+        });
+    });
+
+    button10.on("up", function () {
+        io.sockets.emit('inputChange', {
+            id: 'button9',
+            value: 9
+        });
+    });
+    
 
     io.on('connection', (socket) => {
         console.log('made socket connection to ' + socket.id);
