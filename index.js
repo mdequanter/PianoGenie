@@ -14,13 +14,17 @@ var green = 50;
 var blue = 50;
 var timer = 30000;
 
-board.on('ready', function()  {
+var ledPiano = 0;
+
+board.on('ready', function () {
+
+
 
 
     strip = new pixel.Strip({
         board: this,
         controller: "FIRMATA",
-        strips: [{ pin: 13, length: 8 },], // this is preferred form for definition
+        strips: [{ pin: 13, length: 43 },], // this is preferred form for definition
         gamma: 2.8, // set to a gamma that works nicely for WS2812
     });
 
@@ -48,6 +52,9 @@ board.on('ready', function()  {
     });
 
     var clients = {};
+
+
+ 
 
 
     button1 = new five.Button({
@@ -104,8 +111,8 @@ board.on('ready', function()  {
 
 
     button1.on("down", function (value) {
-        strip.pixel(0).color("red");
-        strip.show();
+        //strip.pixel(0).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button1',
             value: 0
@@ -114,8 +121,8 @@ board.on('ready', function()  {
 
 
     button1.on("up", function (value) {
-        strip.pixel(0).color("blue");
-        strip.show();
+        //strip.pixel(0).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button1',
             value: 20
@@ -124,8 +131,8 @@ board.on('ready', function()  {
 
 
     button2.on("down", function () {
-        strip.pixel(1).color("red");
-        strip.show();
+        //strip.pixel(1).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button2',
             value: 1
@@ -133,8 +140,8 @@ board.on('ready', function()  {
     });
 
     button2.on("up", function () {
-        strip.pixel(1).color("blue");
-        strip.show();
+        //strip.pixel(1).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button2',
             value: 21
@@ -143,8 +150,8 @@ board.on('ready', function()  {
 
 
     button3.on("down", function (value) {
-        strip.pixel(2).color("red");
-        strip.show();
+        //strip.pixel(2).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button3',
             value: 2
@@ -152,16 +159,16 @@ board.on('ready', function()  {
     });
 
     button3.on("up", function (value) {
-        strip.pixel(2).color("blue");
-        strip.show();
+        //strip.pixel(2).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button3',
             value: 22
         });
     });
     button4.on("down", function () {
-        strip.pixel(3).color("red");
-        strip.show();
+        //strip.pixel(3).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button4',
             value: 3
@@ -169,8 +176,8 @@ board.on('ready', function()  {
     });
 
     button4.on("up", function () {
-        strip.pixel(3).color("blue");
-        strip.show();
+        //strip.pixel(3).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button4',
             value: 23
@@ -179,8 +186,8 @@ board.on('ready', function()  {
 
 
     button5.on("down", function () {
-        strip.pixel(4).color("red");
-        strip.show();
+        //strip.pixel(4).color("red");
+        //strip.show();
 
         io.sockets.emit('inputChange', {
             id: 'button5',
@@ -189,8 +196,8 @@ board.on('ready', function()  {
     });
 
     button5.on("up", function () {
-        strip.pixel(4).color("blue");
-        strip.show();
+        //strip.pixel(4).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button5',
             value: 24
@@ -198,8 +205,8 @@ board.on('ready', function()  {
     });
 
     button6.on("down", function () {
-        strip.pixel(5).color("red");
-        strip.show();
+        //strip.pixel(5).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button6',
             value: 5
@@ -207,8 +214,8 @@ board.on('ready', function()  {
     });
 
     button6.on("up", function () {
-        strip.pixel(5).color("blue");
-        strip.show();
+        //strip.pixel(5).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button6',
             value: 25
@@ -217,8 +224,8 @@ board.on('ready', function()  {
 
 
     button7.on("down", function () {
-        strip.pixel(6).color("red");
-        strip.show();
+        //strip.pixel(6).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button7',
             value: 6
@@ -226,8 +233,8 @@ board.on('ready', function()  {
     });
 
     button7.on("up", function () {
-        strip.pixel(6).color("blue");
-        strip.show();
+        //strip.pixel(6).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button7',
             value: 26
@@ -235,8 +242,8 @@ board.on('ready', function()  {
     });
 
     button8.on("down", function () {
-        strip.pixel(7).color("red");
-        strip.show();
+        //strip.pixel(7).color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button8',
             value: 7
@@ -244,8 +251,8 @@ board.on('ready', function()  {
     });
 
     button8.on("up", function () {
-        strip.pixel(7).color("blue");
-        strip.show();
+        //strip.pixel(7).color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button8',
             value: 27
@@ -254,8 +261,8 @@ board.on('ready', function()  {
     
 
     button9.on("down", function () {
-        strip.color("red");
-        strip.show();
+        //strip.color("red");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button9',
             value: 8
@@ -264,8 +271,8 @@ board.on('ready', function()  {
 
 
     button9.on("up", function () {
-        strip.color("blue");
-        strip.show();
+        //strip.color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button9',
             value: 28
@@ -273,8 +280,8 @@ board.on('ready', function()  {
     });
 
     button10.on("down", function () {
-        strip.color("yellow");
-        strip.show();
+        //strip.color("yellow");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button9',
             value: 9
@@ -282,8 +289,8 @@ board.on('ready', function()  {
     });
     
     button10.on("up", function () {
-        strip.color("blue");
-        strip.show();
+        //strip.color("blue");
+        //strip.show();
         io.sockets.emit('inputChange', {
             id: 'button9',
             value: 9
@@ -291,11 +298,44 @@ board.on('ready', function()  {
     });
 
 
+
+
+
+
+
     io.on('connection', (socket) => {
         console.log('made socket connection to ' + socket.id);
         clients[socket.id] = socket;
 
+        socket.on("message", function (data) {
+            console.log(data);
+        });
+
+        socket.on("note", function (data) {
+            //console.log(data);
+            if (data == 0) {
+                strip.color("blue");
+                strip.show();
+            }
+            data = data - 29;
+
+            if (data > 42) {
+                data = 42;
+            }
+            if (data < 0) {
+                data = 0 ;
+            }
+            if (data >= 0) {
+                strip.pixel(data).color("red");
+            }
+            strip.show();
+
+        });
+
+
+
         socket.on('disconnect', function () {
+
             console.log("disconnect: ", socket.id);
             delete clients[socket.id];
             socket.removeAllListeners();

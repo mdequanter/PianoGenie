@@ -49,6 +49,9 @@ let socket = io.connect('http://localhost:5000', {
 });
 
 
+socket.emit("led","ON");
+
+
 const listener = (data) => {
     console.log(data);
 
@@ -56,8 +59,6 @@ const listener = (data) => {
     if (button >= 20) {
         button = button - 20;
     }
-
-
     // Hear it.
 
     if (data.value < 20) {
@@ -74,7 +75,11 @@ const listener = (data) => {
 
         if (data.value <= 7) {
             const note = genie.nextFromKeyWhitelist(button, keyWhitelist, TEMPERATURE); //eerste variabele moet veranderen
-            const pitch = constants.lowest_note + note;
+            const pitch = constants.lowest_note + note
+
+            
+
+
 
             buttonDown(button);
         }
@@ -247,6 +252,7 @@ function doTouchMove(event, down) {
  * Button actions
  ************************/
 function buttonDown(button, fromKeyDown) {
+
   // If we're already holding this button down, nothing new to do.
   if (heldButtonToVisualData.has(button)) {
     return;
@@ -262,7 +268,10 @@ function buttonDown(button, fromKeyDown) {
   const pitch = CONSTANTS.LOWEST_PIANO_KEY_MIDI_NOTE + note;
 
   // Hear it.
-  player.playNoteDown(pitch, button);
+    player.playNoteDown(pitch, button);
+
+    socket.emit("note", pitch);
+
   
   // See it.
   const rect = piano.highlightNote(note, button);
@@ -284,7 +293,9 @@ function buttonUp(button) {
   const thing = heldButtonToVisualData.get(button);
   if (thing) {
     // Don't see it.
-    piano.clearNote(thing.rect);
+      piano.clearNote(thing.rect);
+
+      socket.emit("note", 0);
     
     // Stop holding it down.
     painter.stopNote(thing.noteToPaint);
