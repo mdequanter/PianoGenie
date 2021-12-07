@@ -49,32 +49,52 @@ let socket = io.connect('http://localhost:5000', {
 });
 
 
+socket.emit("led","ON");
+
+
 const listener = (data) => {
     console.log(data);
 
     button = data.value;
-    if (button >= 10) {
-        button = button - 10;
+    if (button >= 20) {
+        button = button - 20;
     }
-
-    const note = genie.nextFromKeyWhitelist(button, keyWhitelist, TEMPERATURE); //eerste variabele moet veranderen
-    const pitch = constants.lowest_note + note;
-
     // Hear it.
 
-    if (data.value < 10) {
-        buttonDown(button);
+    if (data.value < 20) {
+        if (data.value == 8) {
+            sustaining = true;
+            console.log("Sustain");
+        }
 
-        //player.playNoteDown(pitch, button);
+        if (data.value == 9) {
+            genie.resetState();
+            console.log("Resetting");
+        }
 
-        //const rect = piano.highlightNote(note, button);
 
-        //const noteToPaint = painter.addNote(button, rect.getAttribute('x'), rect.getAttribute('width'));
-        //heldButtonToVisualData.set(button, { rect: rect, note: note, noteToPaint: noteToPaint });
+        if (data.value <= 7) {
+            const note = genie.nextFromKeyWhitelist(button, keyWhitelist, TEMPERATURE); //eerste variabele moet veranderen
+            const pitch = constants.lowest_note + note
+
+            
+
+
+
+            buttonDown(button);
+        }
     }
 
-    if (data.value >= 10) {
-        buttonUp(button);
+    if (data.value >= 20) {
+        if (data.value == 28) {
+            sustaining = false;
+        }
+
+        if (data.value <= 27) {
+            buttonUp(button);
+        }
+
+        
     }
 
 
@@ -94,6 +114,7 @@ function initEverything() {
     playBtn.textContent = 'Play';
     playBtn.removeAttribute('disabled');
     playBtn.classList.remove('loading');
+    showMainScreen();
   });
 
   // Start the drawing loop.
@@ -231,6 +252,7 @@ function doTouchMove(event, down) {
  * Button actions
  ************************/
 function buttonDown(button, fromKeyDown) {
+
   // If we're already holding this button down, nothing new to do.
   if (heldButtonToVisualData.has(button)) {
     return;
@@ -246,7 +268,10 @@ function buttonDown(button, fromKeyDown) {
   const pitch = CONSTANTS.LOWEST_PIANO_KEY_MIDI_NOTE + note;
 
   // Hear it.
-  player.playNoteDown(pitch, button);
+    player.playNoteDown(pitch, button);
+
+    socket.emit("note", pitch);
+
   
   // See it.
   const rect = piano.highlightNote(note, button);
@@ -268,7 +293,9 @@ function buttonUp(button) {
   const thing = heldButtonToVisualData.get(button);
   if (thing) {
     // Don't see it.
-    piano.clearNote(thing.rect);
+      piano.clearNote(thing.rect);
+
+      socket.emit("note", 0);
     
     // Stop holding it down.
     painter.stopNote(thing.noteToPaint);
