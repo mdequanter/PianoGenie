@@ -24,7 +24,7 @@ board.on('ready', function () {
     strip = new pixel.Strip({
         board: this,
         controller: "FIRMATA",
-        strips: [{ pin: 13, length: 43 },], // this is preferred form for definition
+        strips: [{ pin: 13, length: 49 },], // this is preferred form for definition
         gamma: 2.8, // set to a gamma that works nicely for WS2812
     });
 
@@ -304,6 +304,7 @@ board.on('ready', function () {
 
 
     io.on('connection', (socket) => {
+
         console.log('made socket connection to ' + socket.id);
         clients[socket.id] = socket;
 
@@ -311,16 +312,38 @@ board.on('ready', function () {
             console.log(data);
         });
 
+
+        strip = new pixel.Strip({
+            board: this,
+            controller: "FIRMATA",
+            strips: [{ pin: 13, length: 49 },], // this is preferred form for definition
+            gamma: 2.8, // set to a gamma that works nicely for WS2812
+        });
+
+        strip.on("ready", function () {
+            console.log("Board ready, lets add light");
+            strip.color("blue"); // turns entire strip red using a hex colour
+            strip.show();
+        });
+
+
+
         socket.on("note", function (data) {
             //console.log(data);
+
+
+            if (!strip) {
+                console.log("Neo not ready");
+            }
+
             if (data == 0) {
                 strip.color("blue");
                 strip.show();
             }
             data = data - 29;
 
-            if (data > 42) {
-                data = 42;
+            if (data > 87) {
+                data = 87;
             }
             if (data < 0) {
                 data = 0 ;
