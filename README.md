@@ -46,3 +46,8 @@ http://localhost:5000
 
 https://user-images.githubusercontent.com/74420584/143873532-421d2b7a-ae7d-40f7-9262-7abece49a9ef.mp4
 
+
+If you also want to use neopixels, follow following tutorial and don't forget to flash your arduino as described :
+
+https://npm.io/package/node-pixel
+
